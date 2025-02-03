@@ -65,7 +65,7 @@ jobs:
 
       - name: Set up Image
         run: |
-          sed -i "s%image: ${{ secrets.ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.ECR_PRIVATE_REPOSITORY }}:[A-z0-9]*%image: ${{ secrets.ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.ECR_PRIVATE_REPOSITORY }}:${{ github.sha }}%" ./manifest/argocd-deployment.yaml
+          sed -i "s%image: ${{ secrets.ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.ECR_PRIVATE_REPOSITORY }}:[A-z0-9]*%image: ${{ secrets.ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.ECR_PRIVATE_REPOSITORY }}:${{ github.sha }}%" ./manifest/eks-app.yaml
 
       - name: Commit and push changes
         run: |
