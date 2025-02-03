@@ -1,0 +1,4 @@
+basic/entity/Student.class
+basic/K8sBasicApplication.class
+basic/repository/StudentRepository.class
+basic/controller/K8SApiController.class
