@@ -23,7 +23,7 @@ public class K8SApiController {
 	
 	@GetMapping(value = "/api/status1")
 	public String k8sApiTest1() {
-		return "Status - Hello EKS";
+		return "Status - Hello EKS!!";
 	}
 
 	@GetMapping(value = "/api/students")
