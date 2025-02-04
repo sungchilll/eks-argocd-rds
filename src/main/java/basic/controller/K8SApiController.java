@@ -20,6 +20,11 @@ public class K8SApiController {
 	public String k8sApiTest() {
 		return "Status - Hello World!!!";
 	}
+	
+	@GetMapping(value = "/api/status1")
+	public String k8sApiTest1() {
+		return "Status - Hello EKS";
+	}
 
 	@GetMapping(value = "/api/students")
 	public List<Student> getStudents() {
