@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
+
 
 import basic.entity.AttachmentFile;
 import basic.repository.AttachmentFileRepository;
@@ -118,5 +120,24 @@ public class S3Service {
 		
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
+	
+	// 파일 삭제
+		@Transactional
+		public void deleteS3File(long fileNo) {
+			// 1. DB에서 파일 조회
+			AttachmentFile attachmentFile = fileRepository.findById(fileNo)
+				.orElseThrow(() -> new NoSuchElementException("파일이 존재하지 않습니다."));
+			
+			// 2. S3에서 삭제
+			String s3Key = DIR_NAME + "/" + attachmentFile.getAttachmentFileName();
+			try {
+				amazonS3.deleteObject(new DeleteObjectRequest(bucketName, s3Key));
+			} catch (Exception e) {
+				throw new RuntimeException("S3 파일 삭제 중 오류 발생: " + e.getMessage());
+			}
+
+			// 3. DB에서 파일 삭제
+			fileRepository.delete(attachmentFile);
+		}
 	
 }
