@@ -2,6 +2,7 @@ package basic.controller;
 
 import java.util.List;
 
+import org.apache.http.HttpStatus;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,8 +44,8 @@ public class S3FileController {
 			s3Service.deleteS3File(fileNo);
 			return ResponseEntity.ok("파일 삭제 성공");
 		} catch (Exception e) {
-			return ResponseEntity.status(500).body("파일 삭제 실패: " + e.getMessage());
-		}
+	        return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body("파일 삭제 중 오류 발생: " + e.getMessage());
+	    }
 	}
 }
 
