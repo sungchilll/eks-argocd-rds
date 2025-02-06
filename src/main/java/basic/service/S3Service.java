@@ -37,6 +37,9 @@ public class S3Service {
     
     private final String DIR_NAME = "s3_data";
     
+    @Value("${file.storage.path}")
+    private String fileStoragePath;
+    
     // 파일 업로드
 	@Transactional
 	public void uploadS3File(MultipartFile file) throws Exception {
